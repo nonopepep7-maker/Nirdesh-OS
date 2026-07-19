@@ -31,7 +31,7 @@
 <div align="center">
   <br/>
 
-  <a href="YOUR_YOUTUBE_VIDEO_URL_HERE" target="_blank" rel="noopener noreferrer">
+  <a href="https://youtu.be/tw0wvRHh_NQ" target="_blank" rel="noopener noreferrer">
     <img src="https://img.shields.io/badge/Watch_Video_Guide-YouTube-ff0000?style=for-the-badge&logo=youtube&logoColor=white&labelColor=09090b" alt="Watch Nirdesh OS Video Guide" height="40" />
   </a>
   <br/>
