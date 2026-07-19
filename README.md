@@ -18,4 +18,16 @@
   ### ─── ❖ Nirdesh os ❖ ───
   
   *A desktop and Android operating system with built-in apps for everyday use, including Camera, Gallery, Browser, drag-and-drop support, and a simple file manager.*
+
+  
+
+<div align="center">
+  <a href="https://github.com/nonopepep7-maker">
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=25&duration=3500&pause=1000&color=f59e0b&center=true&vCenter=true&width=750&height=60&lines=%E2%9A%A1%EF%B8%8F+Nirdesh+OS+%7C+For+Android+%26+PC;%F0%9F%87%B3%F0%9F%87%B5+Made+by+a+16-year-old+from+Nepal;%F0%9F%94%AE+Obsessed+With+Building;%F0%9F%9B%A1%EF%B8%8F+Privacy-First+%26+Zero-Latency" alt="Nirdesh OS Typewriter Engine" />
+  </a>
+</div>
+  
+
+
+  
   
