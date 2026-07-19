@@ -51,7 +51,7 @@
     </video>
   </p>
 
-  <sub>⚡ Playable execution stream. Toggle fullscreen controls for maximum hardware resolution. ⚡</sub>
+  <sub> Toggle fullscreen controls for maximum hardware resolution </sub>
 
 </div>
   
