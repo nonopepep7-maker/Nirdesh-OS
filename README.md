@@ -15,7 +15,7 @@
 
   <br/>
   
-  ### ─── ❖ Nirdesh os ❖ ───
+  ### ─── ❖ Overview ❖ ───
   
   *A desktop and Android operating system with built-in apps for everyday use, including Camera, Gallery, Browser, drag-and-drop support, and a simple file manager.*
 
@@ -39,22 +39,126 @@
   <br/>
 </div>
 
-<!-- ══════════════════ 📺 LIVE ENVIRONMENT DEMO ══════════════════ -->
-<div align="center">
-  
-  <h3>🎬 Nirdesh OS Live System Walkthrough</h3>
-  <p>Experience the zero-latency, glassmorphic environment executing fluidly in real time.</p>
 
-  <p align="center">
-    <video src="https://github.com/nonopepep7-maker/Nirdesh-OS/blob/main/brave_BUfvFFmFAG.mp4" width="90%" controls>
-      Your browser does not support the video tag natively.
-    </video>
-  </p>
+  <div align="center">
 
-  <sub> Toggle fullscreen controls for maximum hardware resolution </sub>
+
+<img src="preview.png" width="100%">
 
 </div>
-  
+
+
+
+## Features
+
+- 🖥️ Desktop interface
+- 🪟 Draggable windows
+- ➖ Minimize windows
+- 🟩 Maximize windows
+- ❌ Close windows
+- 🌐 Built-in browser
+- 📷 Camera app
+- 🖼️ Gallery
+- ⚙️ Settings
+- 📂 App Drawer
+- 🕒 Live digital clock
+- 🎨 Wallpaper changer
+- 🔊 Volume slider
+- ✨ Glassmorphism design
+- ⚡ Smooth animations
+- 📱 Responsive layout
+
+---
+
+## Taskbar
+
+The taskbar gives quick access to the system.
+
+| App | Purpose |
+|------|---------|
+| ⚙️ Settings | System preferences and wallpapers |
+| ⊞ App Drawer | Opens installed apps |
+| 🌐 Browser | Browse websites |
+| 📷 Camera | Capture photos and videos |
+| 🧮 Calculator | Calculator shortcut |
+| 🖼️ Gallery | View captured media |
+| 🕒 Clock | Live system time |
+| 🔊 Volume | Audio control |
+
+---
+
+## Window Controls
+
+Every application includes desktop-style controls.
+
+- ➖ **Minimize** — Hides the window.
+- 🟩 **Maximize** — Expands the window to almost full screen.
+- ❌ **Close** — Closes the application.
+- 🖱️ **Drag** — Move windows anywhere on the desktop.
+
+---
+
+## Built-in Apps
+
+### ⚙️ Settings
+- Display
+- Wallpaper
+- Lockscreen
+- Media
+- About
+- Themes
+
+### 🌐 Browser
+- URL bar
+- Embedded web browsing
+
+### 📷 Camera
+- Photo mode
+- Video mode
+- Live preview
+- Recording indicator
+
+### 🖼️ Gallery
+- View captured media
+- Delete all media
+- Full-screen preview
+
+### ⊞ App Drawer
+Quick launcher for installed applications.
+
+---
+
+## Technologies
+
+- HTML5
+- CSS3
+- JavaScript
+- Tailwind CSS
+
+---
+
+## Run
+
+```bash
+git clone https://github.com/nonopepep7-maker/Nirdesh-OS.git
+cd Nirdesh-OS
+```
+
+Open `desktop.html` in your browser.
+
+---
+
+## Status
+
+🚧 Active Development
+
+More applications, system features and improvements are planned.
+
+---
+
+## License
+
+MIT License
 
 
   
