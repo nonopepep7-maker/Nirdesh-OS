@@ -46,7 +46,7 @@
   <p>Experience the zero-latency, glassmorphic environment executing fluidly in real time.</p>
 
   <p align="center">
-    <video src="YOUR_UPLOADED_GITHUB_ASSET_URL_HERE" width="90%" controls>
+    <video src="https://github.com/nonopepep7-maker/Nirdesh-OS/blob/main/brave_BUfvFFmFAG.mp4" width="90%" controls>
       Your browser does not support the video tag natively.
     </video>
   </p>
