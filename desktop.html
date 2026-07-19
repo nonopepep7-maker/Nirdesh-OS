@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Nirdesh Os</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="desktop.js" defer></script>
+    <style>
+        :root {
+            --dark: #09090b;
+            --red: #e11d48;
+            --gold: #f59e0b;
+            --white: #fff7ed;
+        }
+        body {
+            background-image: url(https://4kwallpapers.com/images/walls/thumbs_3t/7011.png);
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            overflow: hidden;
+            transition: background-image 0.3s ease;
+        }
+        .taskbar {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            padding: 12px 24px;
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 9999;
+        }
+        .clock {
+            color: rgb(170, 153, 220);
+            font-size: 24px;
+            user-select: none;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            -webkit-text-stroke: 1.5px black;
+        }
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 9999px;
+            outline: none;
+            transition: background 0.2s;
+            user-select: none;
+        }
+        .slider:hover { background: rgba(255, 255, 255, 0.3); }
+        .os-window {
+            position: fixed;
+            bottom: -100%;
+            left: 50%;
+            transition: bottom 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.3s ease,
+                transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            transform: translateX(-50%) scale(0.85);
+            width: 500px;
+            max-width: 95%;
+            height: 400px;
+            background: rgba(9, 9, 11, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 500;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .os-window.open {
+            bottom: 120px;
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+            pointer-events: auto;
+        }
+        .os-window.maximized {
+            width: 100vw !important;
+            height: calc(100vh - 110px) !important;
+            bottom: 100px !important;
+            left: 0 !important;
+            border-radius: 0;
+            max-width: 100%;
+            transform: none !important;
+        }
+        .os-window.minimized {
+            bottom: -100% !important;
+            opacity: 0 !important;
+            transform: translateX(-50%) scale(0.7) !important;
+            pointer-events: none !important;
+        }
+        .os-window.dragging {
+            transition: none !important;
+            cursor: grabbing;
+        }
+        .window-titlebar { cursor: grab; }
+        .window-titlebar:active { cursor: grabbing; }
+        .thumb {
+            width: 80px;
+            height: 52px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+            display: inline-block;
+        }
+        .thumb:hover { border-color: rgba(255, 255, 255, 0.5); transform: scale(1.07); }
+        .thumb.active { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35); }
+        .camera-grid {
+            background-size: 33.33% 33.33%;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body id="desktop">
+    <div id="settingsWindow" class="os-window">
+        <div class="window-titlebar flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/10 select-none">
+            <span class="text-white text-sm font-medium">⚙️ Settings</span>
+            <div class="flex items-center gap-2">
+                <button class="win-min w-3.5 h-3.5 rounded-full bg-amber-500 hover:bg-amber-400 transition-colors" title="Minimize"></button>
+                <button class="win-max w-3.5 h-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 transition-colors" title="Maximize"></button>
+                <button class="win-close w-3.5 h-3.5 rounded-full bg-rose-500 hover:bg-rose-400 transition-colors" title="Close"></button>
+            </div>
+        </div>
+        <div id="s-p1" class="p-6 text-orange-50/90 overflow-y-auto flex-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overflow-auto">
+            <h2 class="text-xl font-semibold mb-1">System Settings</h2>
+            <p class="text-sm text-gray-400 mb-5">Welcome to the Nirdesh Os settings</p>
+            <div class="space-y-3">
+                <div onclick="sNav('s-p2')" class="p-3 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 cursor-pointer transition flex items-center justify-between">
+                    <span>🖥️ Display &amp; Wallpaper</span><span class="text-gray-500 text-xs">›</span>
+                </div>
+                <div onclick="sNav('s-p3')" class="p-3 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 cursor-pointer transition flex items-center justify-between">
+                    <span>🔒 Lockscreen</span><span class="text-gray-500 text-xs">›</span>
+                </div>
+                <div onclick="sNav('s-p4')" class="p-3 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 cursor-pointer transition flex items-center justify-between">
+                    <span>📺 Media</span><span class="text-gray-500 text-xs">›</span>
+                </div>
+                <div onclick="sNav('s-p5')" class="p-3 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 cursor-pointer transition flex items-center justify-between">
+                    <span>About</span><span class="text-gray-500 text-xs">›</span>
+                </div>
+                <div onclick="sNav('s-p6')" class="p-3 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 cursor-pointer transition flex items-center justify-between">
+                    <span> Designs &amp; Themes</span><span class="text-gray-500 text-xs">›</span>
+                </div>
+            </div>
+        </div>
+        <div id="s-p2" class="p-6 text-orange-50/90 overflow-y-auto flex-1 hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overflow-auto">
+            <button onclick="sNav('s-p1')" class="mb-4 px-3 py-1 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 cursor-pointer transition text-sm">← Back</button>
+            <h2 class="text-xl font-semibold mb-4">Display &amp; Wallpaper</h2>
+            <div class="p-4 bg-white/5 rounded-lg">
+                <p class="text-sm text-gray-400 mb-3">Home screen wallpapers — click to apply</p>
+                <div class="flex flex-wrap gap-3">
+                    <img src="https://4kwallpapers.com/images/walls/thumbs_3t/7011.png" class="thumb active" data-url="https://4kwallpapers.com/images/walls/thumbs_3t/7011.png" alt="Wallpaper 1" onclick="changeWallpaper(this)">
+                    <img src="https://4kwallpapers.com/images/walls/thumbs_2t/26348.png" class="thumb" data-url="https://4kwallpapers.com/images/walls/thumbs_2t/26348.png" alt="Wallpaper 2" onclick="changeWallpaper(this)">
+                    <img src="/Assets/vortex-black-hole-astronomy-3840x2160-5415.jpg" class="thumb" data-url="/Assets/vortex-black-hole-astronomy-3840x2160-5415.jpg" alt="Wallpaper 3" onclick="changeWallpaper(this)">
+                    <img src="/Assets/blood-moon-5k-3840x2160-93.jpg" class="thumb" data-url="/Assets/blood-moon-5k-3840x2160-93.jpg" alt="Wallpaper 4" onclick="changeWallpaper(this)">
+                    <img src="/Assets/monkey-d-luffy-one-piece-minimal-art-5k-8k-3840x2160-8211.png" class="thumb" data-url="/Assets/monkey-d-luffy-one-piece-minimal-art-5k-8k-3840x2160-8211.png" alt="Wallpaper 5" onclick="changeWallpaper(this)">
+                    <img src="https://4kwallpapers.com/images/walls/thumbs_2t/26627.png" class="thumb" data-url="https://4kwallpapers.com/images/walls/thumbs_2t/26627.png" alt="Wallpaper 6" onclick="changeWallpaper(this)">
+                    <img src="/Assets/madden-nfl-26-neon-3840x2160-22297.jpg" class="thumb" data-url="/Assets/madden-nfl-26-neon-3840x2160-22297.jpg" alt="Wallpaper 7" onclick="changeWallpaper(this)">
+                    <img src="/Assets/planet-astronomy-outer-space-colorful-black-background-5k-8k-3840x2160-1514.jpg" class="thumb" data-url="/Assets/planet-astronomy-outer-space-colorful-black-background-5k-8k-3840x2160-1514.jpg" alt="Wallpaper 8" onclick="changeWallpaper(this)">
+                </div>
+            </div>
+        </div>
+        <div id="s-p3" class="p-6 text-orange-50/90 overflow-y-auto flex-1 hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overflow-auto">
+            <button onclick="sNav('s-p1')" class="mb-4 px-3 py-1 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 cursor-pointer transition text-sm">← Back</button>
+            <h2 class="text-xl font-semibold mb-4">🔒 Lockscreen</h2>
+            <p class="text-sm text-gray-400">Lockscreen settings coming soon.</p>
+        </div>
+        <div id="s-p4" class="p-6 text-orange-50/90 overflow-y-auto flex-1 hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overflow-auto">
+            <button onclick="sNav('s-p1')" class="mb-4 px-3 py-1 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 cursor-pointer transition text-sm">← Back</button>
+            <h2 class="text-xl font-semibold mb-4">📺 Media</h2>
+            <p class="text-sm text-gray-400">Media settings coming soon.</p>
+        </div>
+        <div id="s-p5" class="p-6 text-orange-50/90 overflow-y-auto flex-1 hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overflow-auto">
+            <button onclick="sNav('s-p1')" class="mb-4 px-3 py-1 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 cursor-pointer transition text-sm">← Back</button>
+            <h2 class="text-xl font-semibold mb-4">About</h2>
+            <h3 class="text-xl">Specifications</h3>
+            <p class="bg-black/20 backdrop-blur-md rounded-xl px-4 py-2 border border-white/20 shadow-lg text-white">Ram : 90ps<br>CPU : Meme Core i7-10750H<br>GPU : Zoro GeForce CDK 9000 Ti<br>OS : Nirdesh OS 369</p>
+            <h3 class="text-xl mt-4">More Info</h3>
+            <p class="bg-gray-800 rounded-lg p-4 text-gray-100"> Nirdesh os is best</p>
+        </div>
+        <div id="s-p6" class="p-6 text-orange-50/90 overflow-y-auto flex-1 hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overflow-auto">
+            <button onclick="sNav('s-p1')" class="mb-4 px-3 py-1 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 cursor-pointer transition text-sm">← Back</button>
+            <h2 class="text-xl font-semibold mb-4">Designs &amp; Themes</h2>
+            <p class="text-sm text-gray-400">Designs &amp; Themes coming soon.</p>
+        </div>
+    </div>
+
+    <div id="appDrawerWindow" class="os-window">
+        <div class="window-titlebar flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/10 select-none">
+            <span class="text-white text-sm font-medium">⊞ App Drawer</span>
+            <div class="flex items-center gap-2">
+                <button class="win-min w-3.5 h-3.5 rounded-full bg-amber-500 hover:bg-amber-400 transition-colors" title="Minimize"></button>
+                <button class="win-max w-3.5 h-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 transition-colors" title="Maximize"></button>
+                <button class="win-close w-3.5 h-3.5 rounded-full bg-rose-500 hover:bg-rose-400 transition-colors" title="Close"></button>
+            </div>
+        </div>
+        <div class="p-6 text-orange-50/90 overflow-y-auto flex-1">
+            <div class="grid grid-cols-4 gap-4 text-center">
+                <div onclick="document.getElementById('browserBtn').click()" class="p-3 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition-all hover:scale-105 active:scale-95">
+                    <div class="text-3xl mb-1">🌐</div><span class="text-xs text-gray-300">Browser</span>
+                </div>
+                <div class="p-3 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition-all hover:scale-105 active:scale-95">
+                    <div class="text-3xl mb-1">📁</div><span class="text-xs text-gray-300">Files</span>
+                </div>
+                <div class="p-3 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition-all hover:scale-105 active:scale-95">
+                    <div class="text-3xl mb-1">📝</div><span class="text-xs text-gray-300">Notes</span>
+                </div>
+                <div class="p-3 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition-all hover:scale-105 active:scale-95">
+                    <div class="text-3xl mb-1">🎵</div><span class="text-xs text-gray-300">Music</span>
+                </div>
+                <div onclick="document.getElementById('settingsIcon').click()" class="p-3 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition-all hover:scale-105 active:scale-95">
+                    <div class="text-3xl mb-1">⚙️</div><span class="text-xs text-gray-300">Settings</span>
+                </div>
+                <div onclick="document.getElementById('galleryBtn').click()" class="p-3 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition-all hover:scale-105 active:scale-95">
+                    <div class="text-3xl mb-1">🖼️</div><span class="text-xs text-gray-300">Photos</span>
+                </div>
+                <div class="p-3 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition-all hover:scale-105 active:scale-95">
+                    <div class="text-3xl mb-1">🗓️</div><span class="text-xs text-gray-300">Calendar</span>
+                </div>
+                <div onclick="document.getElementById('cameraBtn').click()" class="p-3 bg-white/5 rounded-xl hover:bg-white/10 cursor-pointer transition-all hover:scale-105 active:scale-95">
+                    <div class="text-3xl mb-1">📷</div><span class="text-xs text-gray-300">Camera</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cameraWindow" class="os-window" style="width: 440px; height: 480px;">
+        <div class="window-titlebar flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/10 select-none">
+            <span class="text-white text-sm font-medium">📷 Camera Studio</span>
+            <div class="flex items-center gap-2">
+                <button class="win-min w-3.5 h-3.5 rounded-full bg-amber-500 hover:bg-amber-400 transition-colors" title="Minimize"></button>
+                <button class="win-max w-3.5 h-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 transition-colors" title="Maximize"></button>
+                <button class="win-close w-3.5 h-3.5 rounded-full bg-rose-500 hover:bg-rose-400 transition-colors" title="Close"></button>
+            </div>
+        </div>
+        <div class="flex-1 bg-black relative flex flex-col justify-between overflow-hidden">
+            <div id="recIndicator" class="absolute top-4 left-4 flex items-center gap-2 bg-black/60 text-rose-500 text-xs font-mono px-3 py-1 rounded-full border border-rose-500/30 hidden z-20">
+                <span class="w-2 h-2 bg-rose-600 rounded-full animate-pulse"></span> REC <span id="recTimer">00:00</span>
+            </div>
+            <video id="videoFeed" autoplay playsinline class="absolute inset-0 w-full h-full object-cover scale-x-[-1]"></video>
+            <div class="camera-grid absolute inset-0 pointer-events-none"></div>
+            <div class="w-full bg-gradient-to-t from-black via-black/60 to-transparent pt-16 pb-6 px-6 mt-auto z-10 flex flex-col items-center gap-3.5">
+                <div class="flex gap-6 text-[11px] font-bold tracking-widest uppercase mb-1">
+                    <button id="modePhoto" onclick="setMode('photo')" class="text-white border-b-2 border-white pb-0.5 transition-all">Photo</button>
+                    <button id="modeVideo" onclick="setMode('video')" class="text-zinc-400 hover:text-zinc-200 pb-0.5 transition-all">Video</button>
+                </div>
+                <div class="w-full flex items-center justify-between px-4">
+                    <button id="quickThumbBtn" class="w-11 h-11 rounded-full border border-white/20 bg-zinc-900/90 overflow-hidden active:scale-95 transition-transform flex items-center justify-center shadow-lg">
+                        <img id="quickPreview" class="w-full h-full object-cover hidden" src="" />
+                        <span id="previewFallback" class="text-lg">🖼️</span>
+                    </button>
+                    <button id="shutterBtn" class="group relative flex items-center justify-center h-16 w-16 rounded-full bg-white transition-all duration-200 hover:scale-105 active:scale-95 shadow-2xl cursor-pointer">
+                        <span id="shutterInner" class="absolute inset-1 rounded-full border border-black/80 bg-white transition-all"></span>
+                    </button>
+                    <div class="w-11 h-11 flex items-center justify-center opacity-40 text-lg">🔄</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="galleryWindow" class="os-window" style="width: 700px; height: 500px;">
+        <div class="window-titlebar flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/10 select-none">
+            <span class="text-white text-sm font-medium">🖼️Gallery</span>
+            <div class="flex items-center gap-2">
+                <button class="win-min w-3.5 h-3.5 rounded-full bg-amber-500 hover:bg-amber-400 transition-colors" title="Minimize"></button>
+                <button class="win-max w-3.5 h-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 transition-colors" title="Maximize"></button>
+                <button class="win-close w-3.5 h-3.5 rounded-full bg-rose-500 hover:bg-rose-400 transition-colors" title="Close"></button>
+            </div>
+        </div>
+        <div id="galleryGrid" class="flex-1 p-5 grid grid-cols-3 gap-4 overflow-y-auto bg-black/30 content-start"></div>
+        <div class="px-4 py-2.5 bg-black/40 border-t border-white/5 flex justify-end items-center">
+            <button id="clearBtn" class="text-xs tracking-wider text-rose-400/80 hover:text-rose-400 font-medium px-3 py-1.5 rounded-lg border border-rose-500/20 hover:bg-rose-500/10 transition-all">Delete ALL</button>
+        </div>
+    </div>
+
+    <div id="browserWindow" class="os-window" style="width: 680px; height: 480px;">
+        <div class="window-titlebar flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/10 select-none">
+            <span class="text-white text-sm font-medium">🌐 Browser</span>
+            <div class="flex items-center gap-2">
+                <button class="win-min w-3.5 h-3.5 rounded-full bg-amber-500 hover:bg-amber-400 transition-colors" title="Minimize"></button>
+                <button class="win-max w-3.5 h-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 transition-colors" title="Maximize"></button>
+                <button class="win-close w-3.5 h-3.5 rounded-full bg-rose-500 hover:bg-rose-400 transition-colors" title="Close"></button>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 px-3 py-2 bg-black/20 border-b border-white/10">
+            <input id="urlBar" type="text" placeholder="Search or enter a URL…" class="flex-1 bg-white/10 text-white text-sm rounded-lg px-3 py-1.5 outline-none border border-white/10 focus:border-indigo-400 transition placeholder-gray-500">
+            <button id="goBtn" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white text-sm rounded-lg transition">Go</button>
+        </div>
+        <iframe id="browserFrame" src="about:blank" class="flex-1 w-full border-0"></iframe>
+    </div>
+
+    <canvas id="photoCanvas" class="hidden"></canvas>
+
+    <div id="mediaLightbox" onclick="closeLightbox()" class="fixed inset-0 bg-black/95 backdrop-blur-xl flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 z-[10000] p-8">
+        <button class="absolute top-5 right-5 text-white/60 hover:text-white text-xs tracking-widest uppercase bg-white/5 border border-white/10 px-4 py-2 rounded-full transition-all">✕ Close Preview</button>
+        <div class="max-w-full max-h-full flex items-center justify-center" onclick="event.stopPropagation()">
+            <img id="lightboxImg" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl hidden border border-white/10" src="" />
+            <video id="lightboxVideo" controls autoplay class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl hidden border border-white/10"></video>
+        </div>
+    </div>
+
+    <div class="taskbar">
+        <div class="flex items-center gap-3 select-none">
+            <button id="settingsIcon" class="hover:scale-110 active:scale-95 transition-transform" title="Settings">
+                <img src="Assets/settings.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'⚙️',style:'font-size:28px'}))">
+            </button>
+            <button id="appDrawerIcon" class="hover:scale-110 active:scale-95 transition-transform" title="App Drawer">
+                <img src="Assets/app-drawer.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'⊞',style:'font-size:28px;color:white'}))">
+            </button>
+            <button id="browserBtn" class="hover:scale-110 active:scale-95 transition-transform" title="Browser">
+                <img src="Assets/browser.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🌐',style:'font-size:28px'}))">
+            </button>
+            <button id="cameraBtn" class="hover:scale-110 active:scale-95 transition-transform" title="Camera">
+                <img src="Assets/camera.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'📷',style:'font-size:28px'}))">
+            </button>
+            <button id="calculatorBtn" class="hover:scale-110 active:scale-95 transition-transform" title="Calculator">
+                <img src="Assets/calculator.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🧮',style:'font-size:28px'}))">
+            </button>
+            <button id="galleryBtn" class="hover:scale-110 active:scale-95 transition-transform" title="Gallery">
+                <img src="Assets/gallery.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🖼️',style:'font-size:28px'}))">
+            </button>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="clock" id="clock">00:00:00</div>
+            <div class="flex items-center gap-3 bg-white/10 px-4 py-2 rounded-xl border border-white/10 hover:bg-white/15 transition select-none">
+                <span>🔊</span>
+                <input type="range" min="0" id="volume-control" max="100" value="50" step="10" class="slider">
+            </div>
+        </div>
+    </div>
+  
+</body>
+</html>

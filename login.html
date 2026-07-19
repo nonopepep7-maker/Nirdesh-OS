@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirdesh os | Login</title>
+    <link rel="icon" href="favicon.ico">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            background-color: #000;
+            user-select: none;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, sans-serif;
+        }
+
+        .screen {
+            height: 100vh;
+            width: 100vw;
+            scroll-snap-align: start;
+            display: grid;
+            place-items: center;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .bg-wallpaper {
+            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
+                url('https://picsum.photos/1920/1080') no-repeat center center/cover;
+            background-attachment: fixed;
+        }
+
+        .lock-screen {
+            color: white;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, .6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .time {
+            font-size: 5.5rem;
+            font-weight: 300;
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .date-display {
+            font-size: 1.8rem;
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            font-size: 1.1rem;
+            opacity: 0.85;
+            animation: bounce 2.5s infinite;
+        }
+
+        .login-box {
+            width: min(380px, 90vw);
+            padding: 32px;
+            border-radius: 24px;
+            background: rgba(20, 20, 25, .7);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, .5);
+            text-align: center;
+            color: white;
+            transition: all 0.4s ease;
+        }
+
+        .avatar-container {
+            display: none;
+        }
+
+        h1 {
+            margin-bottom: 8px;
+            font-size: 32px;
+        }
+
+        p {
+            margin-bottom: 24px;
+            color: #d4d4d8;
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 14px;
+            padding: 14px;
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .1);
+            color: white;
+            outline: none;
+            transition: all 0.2s ease;
+            font-size: 16px;
+        }
+
+        input::placeholder {
+            color: #a1a1aa;
+        }
+
+        input:focus {
+            border-color: #f59e0b;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            border: 0;
+            border-radius: 14px;
+            background: linear-gradient(90deg, #e11d48, #f59e0b);
+            color: white;
+            font-weight: 900;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+        }
+
+        .error {
+            min-height: 22px;
+            margin-top: 14px;
+            color: #fb7185;
+            font-size: 14px;
+        }
+
+        .hint {
+            margin-top: 18px;
+            font-size: 13px;
+            color: #a1a1aa;
+        }
+
+        .login-box.windows-design {
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 8px;
+            padding: 40px 36px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .login-box.windows-design .avatar-container {
+            display: block;
+            width: 110px;
+            height: 110px;
+            background: rgba(255, 255, 255, 0.1) url('https://img.icons8.com/windows/110/ffffff/user-male-circle.png') no-repeat center/cover;
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .login-box.windows-design h1 {
+            font-size: 26px;
+            font-weight: 300;
+            margin-bottom: 24px;
+        }
+
+        .login-box.windows-design p,
+        .login-box.windows-design .hint {
+            display: none;
+        }
+
+        .login-box.windows-design input {
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+            padding: 10px 12px;
+        }
+
+        .login-box.windows-design input:focus {
+            background: rgba(255, 255, 255, 0.95);
+            color: #000;
+            border: 2px solid #0078d4;
+        }
+
+        .login-box.windows-design input:focus::placeholder {
+            color: #71717a;
+        }
+
+        .login-box.windows-design button[type="submit"] {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 4px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .login-box.windows-design button[type="submit"]:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: none;
+        }
+
+        .control-panel {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 100;
+            display: flex;
+            gap: 12px;
+
+
+        }
+
+        .control-panel button {
+            width: auto;
+            padding: 12px 20px;
+            border-radius: 12px;
+            background: rgba(20, 20, 25, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: background 0.2s;
+            touch-action: manipulation;
+        }
+
+        .control-panel button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            place-items: center;
+        }
+
+        .modal-content {
+            background: #1f1f23;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 28px;
+            border-radius: 20px;
+            width: min(360px, 92vw);
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 18px;
+            top: 18px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #a1a1aa;
+            transition: color 0.2s;
+            padding: 4px;
+        }
+
+        .close-btn:hover {
+            color: white;
+        }
+
+        .setting-group {
+            margin-top: 25px;
+        }
+
+        .setting-group label {
+            display: block;
+            font-size: 14px;
+            color: #a1a1aa;
+            margin-bottom: 10px;
+        }
+
+        .setting-group select {
+            width: 100%;
+            padding: 14px;
+            background: #27272a;
+            border: 1px solid #3f3f46;
+            color: white;
+            border-radius: 10px;
+            outline: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .custom-theme {
+            filter: hue-rotate(140deg);
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-8px);
+            }
+
+            60% {
+                transform: translateY(-4px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .control-panel {
+                bottom: 16px;
+                left: 16px;
+                right: 16px;
+                justify-content: center;
+
+            }
+
+            .control-panel button {
+                flex: 1;
+                text-align: center;
+                padding: 14px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-wallpaper">
+
+    <div class="screen lock-screen">
+        <h1 class="time" id="clock">00:00</h1>
+        <div class="date-display" id="date">Loading date...</div>
+        <div class="scroll-hint">Scroll up or press any key to unlock</div>
+    </div>
+
+    <div class="screen">
+        <form class="login-box" id="loginForm">
+            <div class="avatar-container"></div>
+
+            <h1>Nirdesh os</h1>
+            <p>Sign in to continue</p>
+            <input id="username" placeholder="Username" autocomplete="username" />
+            <input id="password" type="password" placeholder="Password" autocomplete="current-password" />
+            <button type="submit">Login</button>
+
+            <div class="error" id="error"></div>
+            <div class="hint">
+                Demo username : <b>demo</b><br>
+                Demo password : <b>1234</b>
+            </div>
+        </form>
+    </div>
+
+    <div class="control-panel">
+        <button id="theme-btn">Switch theme</button>
+        <button id="openbtn">Open settings</button>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 style="font-weight: 500;">Settings</h2>
+
+            <div class="setting-group">
+                <label for="styleSelect">Lockscreen & Input Design</label>
+                <select id="styleSelect">
+                    <option value="default">Default Modern Layout</option>
+                    <option value="windows">Windows Design View</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const date = new Date();
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+
+            document.getElementById("clock").innerHTML = `${hours}:${minutes}`;
+
+            const options = { weekday: 'long', month: 'long', day: 'numeric' };
+            document.getElementById("date").innerHTML = date.toLocaleDateString('en-US', options);
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        window.addEventListener('keydown', () => {
+            if (document.activeElement.tagName === 'INPUT') return;
+
+            if (window.scrollY < window.innerHeight / 2) {
+                window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+                setTimeout(() => { username.focus(); }, 400);
+            }
+        });
+
+        const form = document.getElementById('loginForm');
+        const username = document.getElementById('username');
+        const password = document.getElementById('password');
+        const error = document.getElementById('error');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const userValue = username.value.trim();
+            const passValue = password.value.trim();
+
+            if (userValue === "" || passValue === "") {
+                error.textContent = 'Please fill in all fields';
+                return;
+            }
+
+            if (userValue === 'demo' && passValue === '1234') {
+                localStorage.setItem('loggedIn', 'true');
+                window.location.href = 'desktop.html';
+            } else {
+                error.textContent = 'Invalid username or password';
+            }
+        });
+
+        const themeBtn = document.getElementById('theme-btn');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('custom-theme');
+            if (document.body.classList.contains('custom-theme')) {
+                themeBtn.textContent = 'Go back to Default';
+            } else {
+                themeBtn.textContent = 'Switch theme';
+            }
+        });
+
+        const modal = document.getElementById("myModal");
+        const openBtn = document.getElementById("openbtn");
+        const closebtn = document.querySelector(".close-btn");
+        const styleSelect = document.getElementById("styleSelect");
+
+        openBtn.onclick = function () {
+            modal.style.display = "grid";
+        }
+
+        closebtn.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        styleSelect.addEventListener('change', (e) => {
+            if (e.target.value === 'windows') {
+                form.classList.add('windows-design');
+            } else {
+                form.classList.remove('windows-design');
+            }
+        });
+    </script>
+</body>
+
+</html>

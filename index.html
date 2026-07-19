@@ -1,0 +1,195 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nirdesh | Home</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <style>
+    :root {
+      --dark: #09090b;
+      --red: #e11d48;
+      --gold: #f59e0b;
+      --white: #fff7ed;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      font-family: Inter, ui-sans-serif, system-ui, Arial, sans-serif;
+      color: var(--white);
+      background:
+        linear-gradient(135deg, rgba(9, 9, 11, .75), rgba(136, 19, 55, .55), rgba(245, 158, 11, .25)),
+        url("https://4kwallpapers.com/images/walls/thumbs_3t/14291.png") center / cover no-repeat;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -35%;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(245, 158, 11, .35), transparent 26%),
+        radial-gradient(circle at 75% 70%, rgba(225, 29, 72, .38), transparent 28%);
+      animation: floatGlow 14s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      width: min(920px, 92vw);
+      padding: clamp(2.5rem, 7vw, 5rem);
+      text-align: center;
+      border: 1px solid rgba(255, 247, 237, .16);
+      border-radius: 2rem;
+      background: rgba(9, 9, 11, .42);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, .45);
+      user-select: none;
+      
+      
+    }
+
+    .tag {
+      margin-bottom: 1rem;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: #fed7aa;
+    }
+
+    h1 {
+      margin-bottom: 2rem;
+      font-size: clamp(3.4rem, 13vw, 9rem);
+      line-height: .82;
+      font-weight: 950;
+      font-style: italic;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      transform: skewX(-8deg);
+      background: linear-gradient(120deg, #fff, #fed7aa 35%, #fb7185 65%, var(--gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 20px 35px rgba(0, 0, 0, .7));
+      transition: letter-spacing .25s ease, transform .25s ease;
+
+      user-select: none;
+    }
+
+    .hero:hover h1 {
+      letter-spacing: .06em;
+      transform: skewX(-8deg) translateY(-4px);
+    }
+
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 13rem;
+      padding: 1rem 1.5rem;
+      overflow: hidden;
+      isolation: isolate;
+      border: 1px solid rgba(251, 113, 133, .8);
+      border-radius: 999px;
+      background: var(--dark);
+      color: white;
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      box-shadow: 0 0 28px rgba(225, 29, 72, .35);
+      transition: transform .2s ease, border-color .2s ease, color .2s ease;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      border-color: #fbbf24;
+      color: var(--dark);
+    }
+
+    .btn:hover::before {
+      transform: scaleX(1);
+    }
+
+    .btn:focus-visible {
+      outline: 3px solid #fbbf24;
+      outline-offset: 5px;
+    }
+
+    @keyframes floatGlow {
+      from { transform: translate3d(-3%, -2%, 0) rotate(0deg); }
+      to { transform: translate3d(3%, 2%, 0) rotate(8deg); }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        padding: 2rem 1rem;
+        border-radius: 1.5rem;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="hero">
+    <p class="tag">Nirdesh OS</p>
+    <h1>The future of OS</h1>
+    <a class="btn" href="login.html" onmouseenter="makeComputerTalk('For windows and linux')">
+      <p>For windows/linux users →</p>
+    </a>
+    <a class="btn" href="android.html">For android users →</a>
+  </main>
+  <script>
+    function makeComputerTalk(text) {
+      const ua = navigator.userAgent || '';
+      if (ua.includes('Electron') || ua.includes('Chrome')) {
+        console.log('speech synthesis is not supported in this browser');
+        return;
+      }
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 1.2;
+        utterance.pitch = 1.0;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+  </script>
+</body>
+</html>

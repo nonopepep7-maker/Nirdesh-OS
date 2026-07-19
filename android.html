@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nirdesh | Home</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      font-family: system-ui, -apple-system, sans-serif;
+      color: #fff7ed;
+      padding: 1rem;
+      background: linear-gradient(135deg, rgba(9, 9, 11, .9), rgba(136, 19, 55, .5)),
+        url("https://wallpapers.com/images/high/pink-and-blue-4k-android-1togp48be3cq2p89.webp") center/cover no-repeat fixed;
+    }
+
+    .hero {
+      width: min(480px, 100%);
+      padding: clamp(2rem, 8vw, 3.5rem) 2rem;
+      text-align: center;
+      border-radius: 2rem;
+      background: rgba(10, 10, 12, 0.8);
+      border: 1px solid rgba(9, 236, 6, 0.874);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7);
+      animation-name: toptodown;
+      animation-duration: 2.5s;
+
+
+
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+        color: #f43f5e;
+        background: rgba(244, 63, 94, 0.1);
+        padding: .5rem 1rem;
+        border-radius: 99px;
+        margin-bottom: 1.5rem;
+
+        &::before {
+          content: "";
+          width: 6px;
+          height: 6px;
+          background: currentColor;
+          border-radius: 50%;
+          box-shadow: 0 0 10px currentColor;
+        }
+      }
+
+      h1 {
+        font-size: clamp(2.2rem, 6vw, 3rem);
+        font-weight: 900;
+        font-style: italic;
+        text-transform: uppercase;
+        letter-spacing: -0.03em;
+        transform: skewX(-6deg);
+        background: linear-gradient(#fff, #fda4af);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .subtitle {
+        color: #94a3b8;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin: 1rem 0 2rem;
+      }
+
+      .specs {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #f59e0b;
+        margin-bottom: 2.5rem;
+
+        span {
+          background: rgba(255, 255, 255, 0.03);
+          padding: .4rem .8rem;
+          border-radius: .75rem;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+      }
+
+      .cta {
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;
+
+        .btn {
+          display: grid;
+          place-items: center;
+          min-height: 3.5rem;
+          border-radius: 1.25rem;
+          text-decoration: none;
+          font-size: .85rem;
+          font-weight: 700;
+          letter-spacing: .05em;
+          text-transform: uppercase;
+          transition: all .2s ease;
+
+          &:active {
+            transform: scale(.97);
+          }
+        }
+
+        .primary {
+          background: #e11d48;
+          color: #fff;
+          border: 1px solid rgba(209, 144, 247, 0.874);
+
+          box-shadow: 0 8px 24px rgba(225, 29, 72, 0.4);
+
+
+          &:hover {
+            background: #f43f5e;
+            box-shadow: 0 12px 28px rgba(244, 63, 94, 0.5);
+          }
+        }
+
+        .secondary {
+          background: rgba(255, 255, 255, 0.03);
+          color: #fff;
+          border: 1px solid rgba(209, 144, 247, 0.874);
+
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+          }
+        }
+      }
+    }
+
+    @media (min-width: 440px) {
+      .hero .cta {
+        flex-direction: row;
+
+        .btn {
+          flex: 1;
+        }
+      }
+    }
+
+    @keyframes toptodown {
+      0% {
+        transform: translateY(-100%);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="hero">
+    <div class="tag">Only for android</div>
+    <h1>Nirdesh OS</h1>
+    <p class="subtitle">The future of OS for android, better than hypothetical os , web based and apk based os with a
+      full focus on privacy</p>
+
+    <div class="specs">
+      <span> 32gb RAM</span>
+      <span>1tB storage</span>
+      <span>20gbps internet</span>
+    </div>
+
+    <div class="cta">
+      <a href="login.html" class="btn primary">Download APK</a>
+      <a href="loginand.html" class="btn secondary">Try In Browser</a>
+    </div>
+  </main>
+
+</body>
+
+</html>
