@@ -6,7 +6,8 @@
     <title>Nirdesh Os</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="desktop.js" defer></script>
+    
+   
     <style>
         :root {
             --dark: #09090b;
@@ -141,7 +142,7 @@
                 <button class="win-close w-3.5 h-3.5 rounded-full bg-rose-500 hover:bg-rose-400 transition-colors" title="Close"></button>
             </div>
         </div>
-        <div id="s-p1" class="p-6 text-orange-50/90 overflow-y-auto flex-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overflow-auto">
+        <div id="s-p1" class="p-6 text-orange-50/90 overflow-y-auto flex-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ">
             <h2 class="text-xl font-semibold mb-1">System Settings</h2>
             <p class="text-sm text-gray-400 mb-5">Welcome to the Nirdesh Os settings</p>
             <div class="space-y-3">
@@ -162,7 +163,7 @@
                 </div>
             </div>
         </div>
-        <div id="s-p2" class="p-6 text-orange-50/90 overflow-y-auto flex-1 hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overflow-auto">
+        <div id="s-p2" class="p-6 text-orange-50/90 overflow-y-auto flex-1 hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <button onclick="sNav('s-p1')" class="mb-4 px-3 py-1 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 cursor-pointer transition text-sm">← Back</button>
             <h2 class="text-xl font-semibold mb-4">Display &amp; Wallpaper</h2>
             <div class="p-4 bg-white/5 rounded-lg">
@@ -170,12 +171,12 @@
                 <div class="flex flex-wrap gap-3">
                     <img src="https://4kwallpapers.com/images/walls/thumbs_3t/7011.png" class="thumb active" data-url="https://4kwallpapers.com/images/walls/thumbs_3t/7011.png" alt="Wallpaper 1" onclick="changeWallpaper(this)">
                     <img src="https://4kwallpapers.com/images/walls/thumbs_2t/26348.png" class="thumb" data-url="https://4kwallpapers.com/images/walls/thumbs_2t/26348.png" alt="Wallpaper 2" onclick="changeWallpaper(this)">
-                    <img src="/Assets/vortex-black-hole-astronomy-3840x2160-5415.jpg" class="thumb" data-url="/Assets/vortex-black-hole-astronomy-3840x2160-5415.jpg" alt="Wallpaper 3" onclick="changeWallpaper(this)">
-                    <img src="/Assets/blood-moon-5k-3840x2160-93.jpg" class="thumb" data-url="/Assets/blood-moon-5k-3840x2160-93.jpg" alt="Wallpaper 4" onclick="changeWallpaper(this)">
-                    <img src="/Assets/monkey-d-luffy-one-piece-minimal-art-5k-8k-3840x2160-8211.png" class="thumb" data-url="/Assets/monkey-d-luffy-one-piece-minimal-art-5k-8k-3840x2160-8211.png" alt="Wallpaper 5" onclick="changeWallpaper(this)">
+                    <img src="Assets/vortex-black-hole-astronomy-3840x2160-5415.jpg" class="thumb" data-url="/Assets/vortex-black-hole-astronomy-3840x2160-5415.jpg" alt="Wallpaper 3" onclick="changeWallpaper(this)">
+                    <img src="Assets/blood-moon-5k-3840x2160-93.jpg" class="thumb" data-url="/Assets/blood-moon-5k-3840x2160-93.jpg" alt="Wallpaper 4" onclick="changeWallpaper(this)">
+                    <img src="Assets/monkey-d-luffy-one-piece-minimal-art-5k-8k-3840x2160-8211.png" class="thumb" data-url="/Assets/monkey-d-luffy-one-piece-minimal-art-5k-8k-3840x2160-8211.png" alt="Wallpaper 5" onclick="changeWallpaper(this)">
                     <img src="https://4kwallpapers.com/images/walls/thumbs_2t/26627.png" class="thumb" data-url="https://4kwallpapers.com/images/walls/thumbs_2t/26627.png" alt="Wallpaper 6" onclick="changeWallpaper(this)">
-                    <img src="/Assets/madden-nfl-26-neon-3840x2160-22297.jpg" class="thumb" data-url="/Assets/madden-nfl-26-neon-3840x2160-22297.jpg" alt="Wallpaper 7" onclick="changeWallpaper(this)">
-                    <img src="/Assets/planet-astronomy-outer-space-colorful-black-background-5k-8k-3840x2160-1514.jpg" class="thumb" data-url="/Assets/planet-astronomy-outer-space-colorful-black-background-5k-8k-3840x2160-1514.jpg" alt="Wallpaper 8" onclick="changeWallpaper(this)">
+                    <img src="Assets/madden-nfl-26-neon-3840x2160-22297.jpg" class="thumb" data-url="/Assets/madden-nfl-26-neon-3840x2160-22297.jpg" alt="Wallpaper 7" onclick="changeWallpaper(this)">
+                    <img src="Assets/planet-astronomy-outer-space-colorful-black-background-5k-8k-3840x2160-1514.jpg" class="thumb" data-url="/Assets/planet-astronomy-outer-space-colorful-black-background-5k-8k-3840x2160-1514.jpg" alt="Wallpaper 8" onclick="changeWallpaper(this)">
                 </div>
             </div>
         </div>
@@ -308,6 +309,51 @@
         <iframe id="browserFrame" src="about:blank" class="flex-1 w-full border-0"></iframe>
     </div>
 
+    <div id="calculatorWindow" class="os-window" style="width: 330px; height: 480px;">
+        <div class="window-titlebar flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/10 select-none">
+            <span class="text-white text-sm font-medium">🧮 Calculator</span>
+            <div class="flex items-center gap-2">
+                <button class="win-min w-3.5 h-3.5 rounded-full bg-amber-500 hover:bg-amber-400 transition-colors" title="Minimize"></button>
+                <button class="win-max w-3.5 h-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 transition-colors" title="Maximize"></button>
+                <button class="win-close w-3.5 h-3.5 rounded-full bg-rose-500 hover:bg-rose-400 transition-colors" title="Close"></button>
+            </div>
+        </div>
+        <div class="flex flex-col flex-1 p-4 bg-black/30 justify-between">
+            <div>
+                <div id="calcHistroy" class="h-6 text-right text-xs font-mono text-gray-400 pr-2"></div>
+                <div id="calcDisplay" class="mb-4 p-3 text-right text-2xl font-mono bg-black/40 text-white rounded-lg border border-white/10 select-none overflow-x-auto">0</div>
+                </div>
+            <div class="grid grid-cols-4 gap-2 text-white font-medium">
+                <button onclick="calcClear()" class="p-3 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 rounded-xl transition active:scale-95 border border-rose-500/20">C</button>
+                <button onclick="calcToggleSign()" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition active:scale-95 border border-white/5">+/-</button>
+                <button onclick="calcPercent()" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition active:scale-95 border border-white/5">%</button>
+                <button onclick="calcOp('/')" class="p-3 bg-indigo-500/30 hover:bg-indigo-500/40 text-indigo-200 rounded-xl transition active:scale-95 border border-indigo-500/20">÷</button>
+
+                <button onclick="calcNum('7')" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition active:scale-95 border border-white/5">7</button>
+                <button onclick="calcNum('8')" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition active:scale-95 border border-white/5">8</button>
+                <button onclick="calcNum('9')" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition active:scale-95 border border-white/5">9</button>
+                <button onclick="calcOp('*')" class="p-3 bg-indigo-500/30 hover:bg-indigo-500/40 text-indigo-200 rounded-xl transition active:scale-95 border border-indigo-500/20">×</button>
+
+                <button onclick="calcNum('4')" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition active:scale-95 border border-white/5">4</button>
+                <button onclick="calcNum('5')" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition active:scale-95 border border-white/5">5</button>
+                <button onclick="calcNum('6')" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition active:scale-95 border border-white/5">6</button>
+                <button onclick="calcOp('-')" class="p-3 bg-indigo-500/30 hover:bg-indigo-500/40 text-indigo-200 rounded-xl transition active:scale-95 border border-indigo-500/20">−</button>
+
+                
+                <button onclick="calcNum('1')" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition active:scale-95 border border-white/5">1</button>
+                <button onclick="calcNum('2')" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition active:scale-95 border border-white/5">2</button>
+                <button onclick="calcNum('3')" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition active:scale-95 border border-white/5">3</button>
+                <button onclick="calcOp('+')" class="p-3 bg-indigo-500/30 hover:bg-indigo-500/40 text-indigo-200 rounded-xl transition active:scale-95 border border-indigo-500/20">+</button>
+                
+                <button onclick="calcNum('0')" class="col-span-2 p-3 bg-white/5 hover:bg-white/10 rounded-xl transition active:scale-95 border border-white/5 text-left pl-6">0</button>
+                <button onclick="calcDecimal()" class="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition active:scale-95 border border-white/5">.</button>
+                <button onclick="calcEquals()" class="p-3 bg-indigo-600 hover:bg-indigo-500 text-indigo-200 rounded-xl transition active:scale-95 shadow-lg border border-indigo-400/30">=</button>
+            </div>
+        </div>
+    </div>
+
+            
+
     <canvas id="photoCanvas" class="hidden"></canvas>
 
     <div id="mediaLightbox" onclick="closeLightbox()" class="fixed inset-0 bg-black/95 backdrop-blur-xl flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 z-[10000] p-8">
@@ -321,22 +367,22 @@
     <div class="taskbar">
         <div class="flex items-center gap-3 select-none">
             <button id="settingsIcon" class="hover:scale-110 active:scale-95 transition-transform" title="Settings">
-                <img src="Assets/settings.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'⚙️',style:'font-size:28px'}))">
+                <img src="/Assets/settings.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'⚙️',style:'font-size:28px'}))">
             </button>
             <button id="appDrawerIcon" class="hover:scale-110 active:scale-95 transition-transform" title="App Drawer">
-                <img src="Assets/app-drawer.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'⊞',style:'font-size:28px;color:white'}))">
+                <img src="/Assets/app-drawer.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'⊞',style:'font-size:28px;color:white'}))">
             </button>
             <button id="browserBtn" class="hover:scale-110 active:scale-95 transition-transform" title="Browser">
-                <img src="Assets/browser.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🌐',style:'font-size:28px'}))">
+                <img src="/Assets/browser.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🌐',style:'font-size:28px'}))">
             </button>
             <button id="cameraBtn" class="hover:scale-110 active:scale-95 transition-transform" title="Camera">
-                <img src="Assets/camera.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'📷',style:'font-size:28px'}))">
+                <img src="/Assets/camera.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'📷',style:'font-size:28px'}))">
             </button>
             <button id="calculatorBtn" class="hover:scale-110 active:scale-95 transition-transform" title="Calculator">
-                <img src="Assets/calculator.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🧮',style:'font-size:28px'}))">
+                <img src="/Assets/calculator.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🧮',style:'font-size:28px'}))">
             </button>
             <button id="galleryBtn" class="hover:scale-110 active:scale-95 transition-transform" title="Gallery">
-                <img src="Assets/gallery.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🖼️',style:'font-size:28px'}))">
+                <img src="/Assets/gallery.png" alt="" class="w-10 h-10 drop-shadow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'🖼️',style:'font-size:28px'}))">
             </button>
         </div>
         <div class="flex items-center gap-6">
@@ -347,6 +393,12 @@
             </div>
         </div>
     </div>
+
+    <script src="desktop2.js"></script>
+    <script src="desktop.js"></script>
+    
   
 </body>
 </html>
+
+

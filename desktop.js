@@ -117,6 +117,7 @@ setupWindow('appDrawerWindow', 'appDrawerIcon');
 setupWindow('browserWindow', 'browserBtn');
 setupWindow('cameraWindow', 'cameraBtn');
 setupWindow('galleryWindow', 'galleryBtn');
+setupWindow('calculatorWindow', 'calculatorBtn');
 
 document.getElementById('quickThumbBtn').addEventListener('click', () => {
     const galWin = document.getElementById('galleryWindow');
