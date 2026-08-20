@@ -220,33 +220,33 @@ The project also uses browser APIs for camera, microphone, media recording, and 
 ```text
 Nirdesh-OS/
 │
-├── index.html
+├── Assets/
+│   ├── 1.png
+│   ├── app-drawer.png
+│   ├── blood-moon-5k-3840x2160-93.jpg
+│   ├── browser.png
+│   ├── calculator.png
+│   ├── calculator2.png
+│   ├── camera.png
+│   ├── favicon.ico
+│   ├── gallery.png
+│   ├── madden-nfl-26-neon-3840x2160-22297.jpg
+│   ├── monkey-d-luffy-one-piece-minimal-art-5k-8k-3840x2160-8211.png
+│   ├── planet-astronomy-outer-space-colorful-black-background-5k-8k-3840x2160-1514.jpg
+│   ├── settings.png
+│   └── vortex-black-hole-astronomy-3840x2160-5415.jpg
+│
+├── 3dgame.html
+├── android.html
 ├── desktop.html
 ├── desktop.js
 ├── desktop2.js
-├── android.html
-├── 3dgame.html
+├── download.html
 ├── home.html
+├── index.html
 ├── login.html
 ├── loginand.html
-├── download.html
 │
-├── 1.png
-├── app-drawer.png
-├── browser.png
-├── calculator.png
-├── calculator2.png
-├── camera.png
-├── gallery.png
-├── settings.png
-│
-├── blood-moon-5k-3840x2160-93.jpg
-├── madden-nfl-26-neon-3840x2160-22297.jpg
-├── monkey-d-luffy-one-piece-minimal-art-5k-8k-3840x2160-8211.png
-├── planet-astronomy-outer-space-colorful-black-background-5k-8k-3840x2160-1514.jpg
-├── vortex-black-hole-astronomy-3840x2160-5415.jpg
-│
-├── favicon.ico
 ├── LICENSE
 └── README.md
 ```
